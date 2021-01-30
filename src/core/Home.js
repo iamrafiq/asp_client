@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { loadCountries, selectCountries } from "../redux/countriesReducer";
 import Layout from "./Layout";
+import InsertInput from "../user/InsertInput";
 function Home() {
   const dispatch = useDispatch();
   const countries = useSelector(selectCountries);
@@ -14,7 +15,9 @@ function Home() {
     <Layout className="container-fluid">
       {countries ? (
         countries.length > 1 ? (
-          <span>countries loaded</span>
+          <React.Fragment>
+              <InsertInput></InsertInput>
+          </React.Fragment>
         ) : (
         <span>Something went worng, please try again! {countries.error}</span>
         )
