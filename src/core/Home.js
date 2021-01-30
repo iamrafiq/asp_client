@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { loadCountries, selectCountries } from "../redux/countriesReducer";
 import Layout from "./Layout";
-import InsertInput from "../user/InsertInput";
+import InputCard from "../card/InputCard";
+import MainCard from "../card/MainCard";
 function Home() {
   const dispatch = useDispatch();
   const countries = useSelector(selectCountries);
@@ -16,13 +17,26 @@ function Home() {
       {countries ? (
         countries.length > 1 ? (
           <React.Fragment>
-              <InsertInput></InsertInput>
+            <InputCard></InputCard>\
+            <MainCard></MainCard>
           </React.Fragment>
         ) : (
-        <span>Something went worng, please try again! {countries.error}</span>
+          <div className="row">
+            <div className="col-md-8 offset-md-2">
+              <span className="text-muted"> 
+                Something went worng, please try again! {countries.error}
+              </span>
+            </div>
+          </div>
         )
       ) : (
-        <span>Loading....please wait!</span>
+        <div className="row">
+          <div className="col-md-8 offset-md-2">
+            <span>
+              <span className="text-muted">Loading....please wait!</span>
+            </span>
+          </div>
+        </div>
       )}
     </Layout>
   );
