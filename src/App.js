@@ -1,7 +1,18 @@
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { loadCountries, selectCountries } from "./redux/countriesReducer";
+
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+  const countries = useSelector(selectCountries);
+
+  useEffect(() => {
+    dispatch(loadCountries());
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +26,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {countries.length}
         </a>
       </header>
     </div>
