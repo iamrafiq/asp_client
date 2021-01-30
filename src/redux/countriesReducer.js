@@ -4,7 +4,7 @@ import { getCountries } from "../core/apiCore";
 export const countriesSlice = createSlice({
   name: "countries",
   initialState: {
-    data: [],
+    data: null,
   },
   reducers: {
     setCountries: (state, action) => {
@@ -16,9 +16,12 @@ export const countriesSlice = createSlice({
 const { setCountries } = countriesSlice.actions;
 
 export const loadCountries = () => (dispatch) => {
-  getCountries().then((data) => {
-    dispatch(setCountries({ data }));
-  });
+  getCountries()
+    .then((data) => {
+      console.log("Eeeeror", data)
+
+      dispatch(setCountries({ data }));
+    })
 };
 
 export const selectCountries = (state) => {
