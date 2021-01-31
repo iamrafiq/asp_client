@@ -8,6 +8,7 @@ import {
 import { selectCountries } from "../redux/countriesReducer";
 import AhoCorasick from "../core/AhoCorasick";
 import Modal from "../widget/modal/modal";
+import CountriesCard from "./CountriesCard";
 const MainCard = () => {
   const [modalState, setModalState] = useState(false);
   const dispatch = useDispatch();
@@ -30,20 +31,33 @@ const MainCard = () => {
       <div class="card">
         <div class="card-header">Countries:</div>
         <div class="card-body">
-          <p class="card-text">{inputText}</p>
-          <div className="row">
-            {pickedCountries &&
-              pickedCountries.map((item, index) => (
-                <h3 key={index} class="m-1">
-                  <span class="badge badge-pill badge-dark">{item}</span>
-                </h3>
-              ))}
-            <h3 class="m-1" onClick={(e) => toggleState(e)}>
-              <span class="badge badge-pill badge-primary">+ Add</span>
-            </h3>
+          <div class="p-3" style={{ overflowY: "auto", maxHeight: "650px" }}>
+            <div className="row">
+              <p class="card-text">{inputText}</p>
+            </div>
+
+            <div className="row">
+              {pickedCountries &&
+                pickedCountries.map((item, index) => (
+                  <h3 key={index} class="mt-1 pr-1">
+                    <span class="badge badge-pill badge-dark">{item}</span>
+                  </h3>
+                ))}
+              <h3
+                style={{ cursor: "pointer" }}
+                onClick={(e) => toggleState(e)}
+                class="mt-1"
+              >
+                <span class="badge badge-pill badge-primary ">+ Add</span>
+              </h3>
+            </div>
           </div>
-          <div className="row">
-            <button className="btn btn-outline-primary">Submit</button>
+          <div class="border border-light p-2 mb-4">
+            <div class="text-center">
+              <button type="button" class="btn btn-primary">
+                Submit Activity
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -53,8 +67,14 @@ const MainCard = () => {
   return (
     <div>
       {modalState && (
-        <Modal title="Select countries:" id="modal" isOpen={modalState} onClose={toggleState}>
-          <div className="box-body">I am the content of the modal</div>
+        <Modal
+          title="Select countries:"
+          id="modal"
+          isOpen={modalState}
+          onClose={toggleState}
+          modalSize={"lg"}
+        >
+          <CountriesCard></CountriesCard>
         </Modal>
       )}
       <div className="row">

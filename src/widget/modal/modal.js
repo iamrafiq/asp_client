@@ -12,7 +12,7 @@ class Modal extends Component {
     title: "",
     id: "",
     modalClass: "",
-    modalSize: "md",
+    modalSize: "lg",
   };
 
   static propTypes = {
