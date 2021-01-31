@@ -53,7 +53,7 @@ const MainCard = () => {
   return (
     <div>
       {modalState && (
-        <Modal id="modal" isOpen={modalState} onClose={toggleState}>
+        <Modal title="Select countries:" id="modal" isOpen={modalState} onClose={toggleState}>
           <div className="box-body">I am the content of the modal</div>
         </Modal>
       )}

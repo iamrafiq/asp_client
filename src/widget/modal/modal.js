@@ -9,12 +9,14 @@ const modalRoot = document.getElementById("modal-root");
 
 class Modal extends Component {
   static defaultProps = {
+    title: "",
     id: "",
     modalClass: "",
     modalSize: "md",
   };
 
   static propTypes = {
+    title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
@@ -72,7 +74,7 @@ class Modal extends Component {
       >
         <div className="box-dialog">
           <div className="box-header">
-            <h4 className="box-title">Pure React Modal</h4>
+            <h4 className="box-title">{this.props.title}</h4>
             <button onClick={this.handleClick} className="close">
               ×
             </button>
