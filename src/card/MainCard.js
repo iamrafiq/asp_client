@@ -1,43 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectInputText,
   setPickedCountries,
   selectPickedCountries,
 } from "../redux/activityReducer";
-import {selectCountries } from "../redux/countriesReducer";
-
-import { findCountries } from "../core/countryFinder";
+import { selectCountries } from "../redux/countriesReducer";
 import AhoCorasick from "../core/AhoCorasick";
+import Modal from "../widget/modal/modal";
 const MainCard = () => {
+  const [modalState, setModalState] = useState(false);
   const dispatch = useDispatch();
-  const countries = useSelector(selectCountries);
+  let ac = new AhoCorasick(useSelector(selectCountries));
   const inputText = useSelector(selectInputText);
   const pickedCountries = useSelector(selectPickedCountries);
-  var ac = new AhoCorasick(countries);
-//   var results = ac.search('Canada find keyword1 at position 19 and keyword2 at position 47.');
-  
+
+  const toggleState = (e) => setModalState(!modalState);
+
   const clickSubmit = (e) => {
     e.preventDefault();
   };
+
   useEffect(() => {
-    dispatch(setPickedCountries({pickedCountries:ac.search(inputText)}));
+    dispatch(setPickedCountries({ pickedCountries: ac.search(inputText) }));
   }, [inputText]);
-  const submitForm = () => (
+
+  const form = () => (
     <form onSubmit={clickSubmit}>
       <div class="card">
         <div class="card-header">Countries:</div>
         <div class="card-body">
           <p class="card-text">{inputText}</p>
-          <p class="card-text">{pickedCountries}</p>
-
           <div className="row">
             {pickedCountries &&
               pickedCountries.map((item, index) => (
-                <span class="badge badge-pill badge-dark">{item.name}</span>
+                <h3 key={index} class="m-1">
+                  <span class="badge badge-pill badge-dark">{item}</span>
+                </h3>
               ))}
+            <h3 class="m-1" onClick={(e) => toggleState(e)}>
+              <span class="badge badge-pill badge-primary">+ Add</span>
+            </h3>
           </div>
-
           <div className="row">
             <button className="btn btn-outline-primary">Submit</button>
           </div>
@@ -47,8 +51,15 @@ const MainCard = () => {
   );
 
   return (
-    <div className="row">
-      <div className="col-md-6 offset-md-3">{submitForm()}</div>
+    <div>
+      {modalState && (
+        <Modal id="modal" isOpen={modalState} onClose={toggleState}>
+          <div className="box-body">I am the content of the modal</div>
+        </Modal>
+      )}
+      <div className="row">
+        <div className="col-md-6 offset-md-3">{form()}</div>
+      </div>
     </div>
   );
 };
