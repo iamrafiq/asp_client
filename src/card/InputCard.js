@@ -13,7 +13,7 @@ const InputCard = () => {
   };
 
   const newInput = () => (
-    <div class="card">
+    <div class="card mt-5">
       <div class="card-header">Write your text:</div>
       <div class="card-body">
         <input

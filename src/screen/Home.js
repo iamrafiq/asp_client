@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { loadCountries, selectCountries } from "../redux/countriesReducer";
-import Layout from "./Layout";
+import Layout from "../core/Layout";
 import InputCard from "../card/InputCard";
 import MainCard from "../card/MainCard";
 function Home() {
@@ -23,8 +23,8 @@ function Home() {
         ) : (
           <div className="row">
             <div className="col-md-8 offset-md-2">
-              <span className="text-muted"> 
-                Something went worng, please try again! {countries.error}
+              <span className="text-alert"> 
+                Countries not found, please try again! {countries.error}
               </span>
             </div>
           </div>

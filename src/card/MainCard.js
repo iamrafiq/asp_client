@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setInputText,
   selectInputText,
   setPickedCountries,
   selectPickedCountries,
@@ -31,7 +32,13 @@ const MainCard = () => {
       if (data.error) {
         console.log(data.error);
       } else {
-        // history.push("/activity/");
+        dispatch(
+          setInputText({
+            inputText: "",
+          })
+        );
+        dispatch(setPickedCountries({ pickedCountries: [] }));
+        history.push("/activity");
       }
     });
   };
@@ -44,7 +51,7 @@ const MainCard = () => {
 
   const form = () => (
     <form onSubmit={clickSubmit}>
-      <div class="card">
+      <div class="card mt-5">
         <div class="card-header">Countries:</div>
         <div class="card-body">
           <div class="p-3" style={{ overflowY: "auto", maxHeight: "650px" }}>
