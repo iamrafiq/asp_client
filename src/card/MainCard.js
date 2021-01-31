@@ -48,7 +48,7 @@ const MainCard = () => {
                 onClick={(e) => toggleState(e)}
                 class="mt-1"
               >
-                <span class="badge badge-pill badge-primary ">+ Add</span>
+                <span class="badge badge-pill badge-primary ">+ add tag</span>
               </h3>
             </div>
           </div>
@@ -72,7 +72,7 @@ const MainCard = () => {
           id="modal"
           isOpen={modalState}
           onClose={toggleState}
-          modalSize={"lg"}
+          modalSize={"sg"}
         >
           <CountriesCard></CountriesCard>
         </Modal>

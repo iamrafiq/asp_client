@@ -17,7 +17,7 @@ function Home() {
       {countries ? (
         countries.length > 1 ? (
           <React.Fragment>
-            <InputCard></InputCard>\
+            <InputCard></InputCard>
             <MainCard></MainCard>
           </React.Fragment>
         ) : (

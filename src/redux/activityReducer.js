@@ -4,7 +4,7 @@ export const activitySlice = createSlice({
   name: "activity",
   initialState: {
     inputText: "",
-    pickedCountries:[],
+    pickedCountries: [],
   },
   reducers: {
     setInputText: (state, action) => {
@@ -16,12 +16,7 @@ export const activitySlice = createSlice({
   },
 });
 
-export const {
-    setInputText,
-    setPickedCountries,
-
-} = activitySlice.actions;
-
+export const { setInputText, setPickedCountries } = activitySlice.actions;
 
 export const selectInputText = (state) => state.activity.inputText;
 export const selectPickedCountries = (state) => state.activity.pickedCountries;
