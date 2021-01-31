@@ -9,3 +9,20 @@ export const getCountries = () => {
     })
     .catch((err) => console.log(err));
 };
+
+export const postActivity = (activity) => {
+  return fetch(`${API}/activity/create`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(activity),
+  })
+    .then((responce) => {
+      return responce.json();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

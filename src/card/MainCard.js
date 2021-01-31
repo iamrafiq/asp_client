@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectInputText,
@@ -9,7 +11,9 @@ import { selectCountries } from "../redux/countriesReducer";
 import AhoCorasick from "../core/AhoCorasick";
 import Modal from "../widget/modal/modal";
 import CountriesCard from "./CountriesCard";
+import { postActivity } from "../core/apiCore";
 const MainCard = () => {
+  const history = useHistory();
   const [modalState, setModalState] = useState(false);
   const dispatch = useDispatch();
   let ac = new AhoCorasick(useSelector(selectCountries));
@@ -20,10 +24,22 @@ const MainCard = () => {
 
   const clickSubmit = (e) => {
     e.preventDefault();
+    postActivity({
+      text: inputText,
+      countries: pickedCountries,
+    }).then((data) => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        // history.push("/activity/");
+      }
+    });
   };
 
   useEffect(() => {
-    dispatch(setPickedCountries({ pickedCountries: [...ac.search(inputText)] }));
+    dispatch(
+      setPickedCountries({ pickedCountries: [...ac.search(inputText)] })
+    );
   }, [inputText]);
 
   const form = () => (
@@ -54,7 +70,11 @@ const MainCard = () => {
           </div>
           <div class="border border-light p-2 mb-4">
             <div class="text-center">
-              <button type="button" class="btn btn-primary">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={(e) => clickSubmit(e)}
+              >
                 Submit Activity
               </button>
             </div>
