@@ -72,7 +72,7 @@
 
   AhoCorasick.prototype.search = function(string) {
       var state = 0;
-      var results = [];
+      var results =  new Set([]);
       for (var i=0; i<string.length; i++) {
           var l = string[i];
           while (state > 0 && !(l in this.gotoFn[state])) {
@@ -87,12 +87,12 @@
           if (this.output[state].length) {
               var foundStrs = this.output[state];
               //results.push([i, foundStrs]); //with index
-              results.push(foundStrs.toString());
+              results.add(foundStrs.toString());
 
           }
       }
 
-      return results;
+       return results;
   };
 
   if (typeof module !== 'undefined') {

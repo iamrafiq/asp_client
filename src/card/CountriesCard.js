@@ -18,9 +18,16 @@ const CountriesCard = () => {
     } else {
     }
   };
+  const formatOptionLabel = ({ value, label }) => (
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div>{label}</div>
+      <div>+</div>
+    </div>
+  );
   return (
     <Select
       onChange={handleChange}
+      formatOptionLabel={formatOptionLabel}
       closeMenuOnSelect={false}
       isMulti
       defaultValue={pickedCountries.map((item, index) => {

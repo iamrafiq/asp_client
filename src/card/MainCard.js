@@ -23,7 +23,7 @@ const MainCard = () => {
   };
 
   useEffect(() => {
-    dispatch(setPickedCountries({ pickedCountries: ac.search(inputText) }));
+    dispatch(setPickedCountries({ pickedCountries: [...ac.search(inputText)] }));
   }, [inputText]);
 
   const form = () => (
