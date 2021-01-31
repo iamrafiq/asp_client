@@ -5,7 +5,7 @@ import {
   selectPickedCountries,
 } from "../redux/activityReducer";
 import { selectCountries } from "../redux/countriesReducer";
-import Select from "react-select";
+import Select , {createFilter}from "react-select";
 
 const CountriesCard = () => {
   const dispatch = useDispatch();
@@ -58,6 +58,7 @@ const CountriesCard = () => {
   return (
     <Select
       onChange={handleChange}
+      filterOption={createFilter({ matchFrom: "start" })}
       formatOptionLabel={formatOptionLabel}
       closeMenuOnSelect={false}
       isMulti

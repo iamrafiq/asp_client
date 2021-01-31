@@ -23,9 +23,11 @@ function Home() {
         ) : (
           <div className="row">
             <div className="col-md-8 offset-md-2">
-              <span className="text-alert"> 
-                Countries not found, please try again! {countries.error}
-              </span>
+              <h2 mt-5>
+                <span className="text-warning">
+                  Countries not found, please try again! {countries.error}
+                </span>
+              </h2>
             </div>
           </div>
         )
